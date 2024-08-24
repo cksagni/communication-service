@@ -7,13 +7,11 @@ public class Vehicle {
     private int id;
     private String name;
     private VehicleType vehicleType;
-    private Branch branch;
 
-    public Vehicle(int id, String name, VehicleType vehicleType, Branch branch) {
+    public Vehicle(int id, String name, VehicleType vehicleType) {
         this.id = id;
         this.name = name;
         this.vehicleType = vehicleType;
-        this.branch = branch;
     }
 
     public int getId() {
@@ -40,11 +38,4 @@ public class Vehicle {
         this.vehicleType = vehicleType;
     }
 
-    public Branch getBranch() {
-        return branch;
-    }
-
-    public void setBranch(Branch branch) {
-        this.branch = branch;
-    }
 }

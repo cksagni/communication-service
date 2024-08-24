@@ -1,16 +1,14 @@
 package vehiclerental.entity;
 
-import java.util.List;
-
-public class Branch {
+public class User {
     private int id;
     private String name;
-    private List<Vehicle> vehicles;
+    private String email;
 
-    public Branch(int id, String name, List<Vehicle> vehicles) {
+    public User(int id, String name, String email) {
         this.id = id;
         this.name = name;
-        this.vehicles = vehicles;
+        this.email = email;
     }
 
     public int getId() {
@@ -29,11 +27,11 @@ public class Branch {
         this.name = name;
     }
 
-    public List<Vehicle> getVehicles() {
-        return vehicles;
+    public String getEmail() {
+        return email;
     }
 
-    public void setVehicles(List<Vehicle> vehicles) {
-        this.vehicles = vehicles;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
