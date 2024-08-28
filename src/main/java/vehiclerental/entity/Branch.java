@@ -1,24 +1,19 @@
 package vehiclerental.entity;
 
+import vehiclerental.constants.VehicleType;
+
+import java.util.HashMap;
 import java.util.List;
 
 public class Branch {
-    private int id;
     private String name;
-    private List<Vehicle> vehicles;
+    private HashMap<VehicleType, List<Vehicle>> vehicles;
+    private HashMap<VehicleType, Integer> prices;
 
-    public Branch(int id, String name, List<Vehicle> vehicles) {
-        this.id = id;
+    public Branch(String name, HashMap<VehicleType, List<Vehicle>> vehicles, HashMap<VehicleType, Integer> prices) {
         this.name = name;
         this.vehicles = vehicles;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.prices = prices;
     }
 
     public String getName() {
@@ -29,11 +24,23 @@ public class Branch {
         this.name = name;
     }
 
-    public List<Vehicle> getVehicles() {
+    public HashMap<VehicleType, List<Vehicle>> getVehicles() {
         return vehicles;
     }
 
-    public void setVehicles(List<Vehicle> vehicles) {
+    public void setVehicles(HashMap<VehicleType, List<Vehicle>> vehicles) {
         this.vehicles = vehicles;
+    }
+
+    public HashMap<VehicleType, Integer> getPrices() {
+        return prices;
+    }
+
+    public void setPrices(HashMap<VehicleType, Integer> prices) {
+        this.prices = prices;
+    }
+
+    public Integer getPrice(VehicleType vehicleType){
+        return this.prices.get(vehicleType);
     }
 }

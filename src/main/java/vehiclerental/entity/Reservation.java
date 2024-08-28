@@ -4,28 +4,17 @@ import java.time.LocalDateTime;
 
 public class Reservation {
 
-    private int Id;
     private Vehicle vehicle;
-    private User user;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private Branch branch;
 
-    public Reservation(int id, Vehicle vehicle, User user, LocalDateTime startTime, LocalDateTime endTime, Branch branch) {
-        Id = id;
+
+    public Reservation(Vehicle vehicle, LocalDateTime startTime, LocalDateTime endTime, Branch branch) {
         this.vehicle = vehicle;
-        this.user = user;
         this.startTime = startTime;
         this.endTime = endTime;
         this.branch = branch;
-    }
-
-    public int getId() {
-        return Id;
-    }
-
-    public void setId(int id) {
-        Id = id;
     }
 
     public Vehicle getVehicle() {
@@ -34,14 +23,6 @@ public class Reservation {
 
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public LocalDateTime getStartTime() {
