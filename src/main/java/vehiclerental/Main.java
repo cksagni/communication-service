@@ -107,8 +107,35 @@ public class Main {
         // add a vehicle to gachibowli
         bookingService.addAVehicleToBranch("gachibowli", new Vehicle(VehicleType.SEDAN));
 
-        bookingService.printAllAvailableVehicles("gachibowli", LocalDateTime.now(), LocalDateTime.now().plusHours(2));
 
+        // rent a SUV from miyapur
+        String status = bookingService.rentAVehicle("miyapur", VehicleType.SUV, LocalDateTime.now(), LocalDateTime.now().plusHours(2));
+        System.out.println(status);
+
+        // rent a SUV from gachibowli
+        status = bookingService.rentAVehicle("gachibowli", VehicleType.SUV, LocalDateTime.now(), LocalDateTime.now().plusHours(2));
+        System.out.println(status);
+
+        // rent a SUV from kukatpally - Not available
+        status = bookingService.rentAVehicle("kukatpally", VehicleType.SUV, LocalDateTime.now(), LocalDateTime.now().plusHours(2));
+        System.out.println(status);
+
+        // print all available vehicles for gachibowli
+        String branchName = "gachibowli";
+        LocalDateTime from = LocalDateTime.now();
+        LocalDateTime to =  LocalDateTime.now().plusHours(2);
+        HashMap<VehicleType, List<Vehicle>> availableVehiclesForABranch = bookingService.getAllAvailableVehiclesForABranch(branchName, from, to);
+        HashMap<VehicleType, Integer> prices = bookingService.getPricesForABranch(branchName);
+        System.out.println("Available vehicles for branch: " + branchName + " from time: " + from + " to time: " + to);
+
+        availableVehiclesForABranch.forEach((k, v) -> {
+            if (!v.isEmpty()) {
+                System.out.println(v.size() + " " + k + " available for Rs. " + prices.get(k) + " per hour.");
+            }
+        });
+
+        // print System view
+        bookingService.printSystemView(from, to);
 
     }
 }

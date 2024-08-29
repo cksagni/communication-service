@@ -7,6 +7,7 @@ import vehiclerental.entity.Vehicle;
 import vehiclerental.repository.ReservationRepository;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -61,17 +62,34 @@ public class BookingService {
         return vehicles;
     }
 
-    public void printAllAvailableVehicles(String branchName, LocalDateTime fromDate, LocalDateTime toDate){
-        HashMap<VehicleType, Integer> prices = this.reservationRepository.getBranch(branchName).getPrices();
-        HashMap<VehicleType, List<Vehicle>> vehicles = this.getAvailableVehicles(branchName, fromDate, toDate);
-        System.out.println("Available vehicles for branch: " + branchName + " from time: " + fromDate + " to time: " + toDate);
-        vehicles.forEach((k, v) ->
-                        System.out.println(v.size() + " " + k + " available for Rs. " + prices.get(k) + " per hour.")
-                );
+    public HashMap<VehicleType, List<Vehicle>> getAllAvailableVehiclesForABranch(String branchName, LocalDateTime fromDate, LocalDateTime toDate){
+        return this.getAvailableVehicles(branchName, fromDate, toDate);
+    }
+
+    public HashMap<VehicleType, Integer> getPricesForABranch(String branchName){
+        return this.reservationRepository.getBranch(branchName).getPrices();
     }
 
     public List<Vehicle> getAvailableVehiclesOfAType(String branchName, VehicleType vehicleType, LocalDateTime fromDate, LocalDateTime toDate){
-        return this.getAvailableVehicles(branchName, fromDate, toDate).get(vehicleType);
+        return this.getAvailableVehicles(branchName, fromDate, toDate).getOrDefault(vehicleType, new ArrayList<Vehicle>());
+    }
+
+    public void printSystemView(LocalDateTime fromDate, LocalDateTime toDate){
+        HashMap<String, Branch> branches = this.reservationRepository.getBranches();
+        System.out.println("System view from: " + fromDate + " to: " + toDate);
+        branches.forEach((k, v) -> {
+            HashMap<VehicleType, List<Vehicle>> availableVehiclesForABranch = getAllAvailableVehiclesForABranch(k, fromDate, toDate);
+            HashMap<VehicleType, Integer> prices = getPricesForABranch(k);
+            System.out.println(k + ":-");
+            availableVehiclesForABranch.forEach((type, allVehicles) -> {
+                if (!allVehicles.isEmpty()) {
+                    System.out.println(allVehicles.size() + " " + type + " available for Rs. " + prices.get(type) + " per hour.");
+                }
+                else{
+                    System.out.println("All " + type + " are booked.");
+                }
+            });
+        });
     }
 
 

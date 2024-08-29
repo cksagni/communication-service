@@ -24,7 +24,7 @@ public class ReservationRepository {
 
     public void addAReservation(Reservation reservation){
         String branchName = reservation.getBranch().getName();
-        List<Reservation> reservations = this.reservationsForBranch.get(branchName);
+        List<Reservation> reservations = this.reservationsForBranch.getOrDefault(branchName, new ArrayList<Reservation>());
         reservations.add(reservation);
         this.reservationsForBranch.put(branchName, reservations);
     }
