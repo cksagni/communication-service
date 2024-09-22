@@ -3,7 +3,7 @@ package vehiclerental;
 import vehiclerental.constants.VehicleType;
 import vehiclerental.entity.Branch;
 import vehiclerental.entity.Vehicle;
-import vehiclerental.repository.ReservationRepository;
+import vehiclerental.data.ReservationData;
 import vehiclerental.service.BookingService;
 
 import java.time.LocalDateTime;
@@ -14,8 +14,8 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        ReservationRepository reservationRepository = new ReservationRepository();
-        BookingService bookingService = new BookingService(reservationRepository);
+        ReservationData reservationData = new ReservationData();
+        BookingService bookingService = new BookingService(reservationData);
 
         // Create branch gachibowli
         HashMap<VehicleType, List<Vehicle>> vehiclesWithType = new HashMap<>();
