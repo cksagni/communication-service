@@ -1,4 +1,4 @@
-package vehiclerental.repository;
+package vehiclerental.data;
 
 import vehiclerental.constants.VehicleType;
 import vehiclerental.entity.Branch;
@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ReservationRepository {
+public class ReservationData {
     private HashMap<String, Branch> branches;
     private HashMap<String, List<Reservation>> reservationsForBranch;
 
-    public ReservationRepository() {
+    public ReservationData() {
         branches = new HashMap<>();
         reservationsForBranch = new HashMap<>();
     }
